@@ -23,6 +23,7 @@ const Weatherform = (props) => {
           <input
             className="w-80 h-12 p-2 border-4 border-indigo-900 outline-none rounded-l-lg font-bold no-underline"
             placeholder="Search by city..."
+            spellcheck="false"
             value={props.cityName}
             onChange={props.handleChange}
           />

@@ -22,6 +22,7 @@ const App = () => {
   const [forecastData, setForecastData] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [renderData, setRenderData] = useState(false);
+  const [fade, setFade] = useState(false);
 
   //function for getting current weather
   const getWeather = (cityName) => {
@@ -70,9 +71,14 @@ const App = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
+    setFade(true);
     setRenderData(true);
     getWeather(cityName);
     getForecast(cityName);
+    setTimeout(() => {
+      //set fade to false, so that the fade animation happens everytime when a search is done
+      setFade(false);
+    }, 2000);
   };
 
   return (
@@ -82,44 +88,48 @@ const App = () => {
         cityName={cityName}
         handleChange={handleChange}
       />
-      <ErrorMessage message={errorMessage} />
-      {renderData ? (
-        <CurrentWeather
-          description={currentWeatherData.description}
-          city={currentWeatherData.city}
-          country={currentWeatherData.country}
-          temperature={currentWeatherData.temperature}
-          icon={currentWeatherData.icon}
-          humidity={currentWeatherData.humidity}
-          windSpeed={currentWeatherData.windSpeed}
-          pressure={currentWeatherData.pressure}
-        />
-      ) : (
-        ""
-      )}
-      {renderData ? (
-        <div className="flex flex-row space-x-8 justify-center items-center">
-          {forecastData.map((card, index) => {
-            return (
-              <ForecastCard
-                key={index}
-                day={
-                  JSON.stringify(new Date(card.dt * 1000).getDate()) +
-                  "." +
-                  JSON.stringify(new Date(card.dt * 1000).getMonth() + 1)
-                }
-                time={
-                  JSON.stringify(new Date(card.dt * 1000).getHours()) + ":00"
-                }
-                icon={`http://openweathermap.org/img/wn/${card.weather[0].icon}@2x.png`}
-                temperature={Math.round(JSON.stringify(card.main.temp)) + " °C"}
-              />
-            );
-          })}
-        </div>
-      ) : (
-        ""
-      )}
+      <div className={fade ? "animate-fade" : ""}>
+        <ErrorMessage message={errorMessage} />
+        {renderData ? (
+          <CurrentWeather
+            description={currentWeatherData.description}
+            city={currentWeatherData.city}
+            country={currentWeatherData.country}
+            temperature={currentWeatherData.temperature}
+            icon={currentWeatherData.icon}
+            humidity={currentWeatherData.humidity}
+            windSpeed={currentWeatherData.windSpeed}
+            pressure={currentWeatherData.pressure}
+          />
+        ) : (
+          ""
+        )}
+        {renderData ? (
+          <div className="flex flex-row space-x-8 justify-center items-center">
+            {forecastData.map((card, index) => {
+              return (
+                <ForecastCard
+                  key={index}
+                  day={
+                    JSON.stringify(new Date(card.dt * 1000).getDate()) +
+                    "." +
+                    JSON.stringify(new Date(card.dt * 1000).getMonth() + 1)
+                  }
+                  time={
+                    JSON.stringify(new Date(card.dt * 1000).getHours()) + ":00"
+                  }
+                  icon={`http://openweathermap.org/img/wn/${card.weather[0].icon}@2x.png`}
+                  temperature={
+                    Math.round(JSON.stringify(card.main.temp)) + " °C"
+                  }
+                />
+              );
+            })}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     </div>
   );
 };
