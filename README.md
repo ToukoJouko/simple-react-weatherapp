@@ -1,3 +1,7 @@
+DEMO: https://simple--weather--app.herokuapp.com/
+
+![image](https://user-images.githubusercontent.com/72581705/142483567-9553adcc-5842-4129-9a5b-43de23660d89.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
