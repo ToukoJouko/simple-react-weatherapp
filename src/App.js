@@ -37,7 +37,7 @@ const App = () => {
           city: response.data.name + ",",
           country: response.data.sys.country,
           temperature: Math.round(response.data.main.temp) + " °C",
-          icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`,
+          icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@4x.png`,
           windSpeed:
             "Wind speed: " + Math.round(response.data.wind.speed) + " m/s",
           humidity: "Humidity: " + response.data.main.humidity + " %",
