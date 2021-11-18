@@ -3,7 +3,11 @@ import React from "react";
 const Weatherform = (props) => {
   return (
     <div className="flex flex-col justify-center items-center mt-16 mb-8">
-      <a href="https://github.com/ToukoJouko/simple-react-weatherapp">
+      <a
+        href="https://github.com/ToukoJouko/simple-react-weatherapp"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <div className="flex flex-row justify-center items-center space-x-2 mb-2 hover:text-blue-300 transition duration-500 ease-in-out">
           <svg
             xmlns="http://www.w3.org/2000/svg"
